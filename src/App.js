@@ -7,6 +7,7 @@ import ImageUploadPage from './components/Real/ImageUploadPage.jsx';
 
 
 
+
 const App = () => {
   return (
     <Router>
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/real" element={<ImageUploadPage />} />
+
       </Routes>
     </Router>
   );
