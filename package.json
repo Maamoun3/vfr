@@ -3,11 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.1",
+    "@react-three/drei": "^9.121.2",
+    "@react-three/fiber": "^8.17.12",
     "cra-template": "1.2.0",
+    "dat.gui": "^0.7.9",
+    "drei": "^2.2.21",
+    "fiber": "^1.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.2",
     "react-scripts": "5.0.1",
-    "vfr": "file:"
+    "react-slider": "^2.0.6",
+    "slider": "^1.0.4",
+    "three": "^0.172.0",
+    "vfr": "file:",
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }

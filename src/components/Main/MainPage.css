@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .containerr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 0 20px;
+  }
+  
+  .headerr {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+  }
+  
+  .login-buttonn, .signup-buttonn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-buttonn:hover, .signup-buttonn:hover {
+    background-color: #0056b3;
+  }
+  
+  .main-content {
+    text-align: center;
+  }
+  
+  .titlee {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .optionss {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .option-cardd {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .option-cardd:hover {
+    transform: scale(1.05);
+  }
+  
+  .option-imagee {
+    max-width: 210px;
+    max-height: 310px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .option-buttonn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .option-buttonn:hover {
+    background-color: #218838;
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    padding: 10px 0;
+  }
+  
+  .footer a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
