@@ -1,0 +1,119 @@
+body {
+    color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    text-align: center;
+    background-color: #fff;
+    margin: 0;
+    overflow: hidden;
+}
+
+#title {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#controls {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: rgba(0, 123, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 250px;
+}
+
+.btn {
+    padding: 12px 18px;
+    background: linear-gradient(to right, #007bff, #00b4d8);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #00b4d8, #007bff);
+    transform: scale(1.05);
+}
+
+#sizeDisplay {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #222;
+    font-weight: bold;
+    text-align: center;
+}
+
+#switch-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.switch-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(to right, #007bff, #00b4d8);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#back-button {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  padding: 10px 15px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+
+#back-button:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+.switch-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.switch-card .icon {
+    font-size: 16px;
+}
+
+.switch-card .label {
+    font-size: 12px;
+}
+
+
+
+

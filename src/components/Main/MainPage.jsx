@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MainPage.css'; 
 
-import screenshot1 from './images/3d.png'
+
+import screenshot1 from './images/3d2.png'
 import screenshot2 from './images/real.png'
 
 import { Button } from '@mui/material';
@@ -34,7 +35,7 @@ const MainPage = () => {
               className="option-imagee"
             />
 
-            <a href='../Avatar/male.html' className="option-buttonn">3D Body Model</a>
+            <a href="/Avatar/index.html" className="option-buttonn">3D Body Model</a>
 
           </div>
 
@@ -52,9 +53,11 @@ const MainPage = () => {
       </main>
 
       <footer className="footer">
-        <p>
-          By using VFR, you agree to our <a href="/terms">Terms</a> and have read our <a href="/privacy-policy">Privacy Policy</a>.
-        </p>
+      <p>
+        By using VFR, you agree to our{" "}
+        <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a> and have read our{" "}
+        <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+      </p>
       </footer>
     </div>
   );

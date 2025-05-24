@@ -11,16 +11,28 @@
 	<body>
 		
 		<div id="info">BodyVisualiser for VFR Project</div>
-        <div id="info"><a href="female.html">Switch to female body.</a></div>
-		<div id="info"><a href="kid.html">Switch to kid's body.</a></div>
+        <div id="switch-container">
+			<div class="switch-card" onclick="location.href='female.html'">
+				<div class="icon">♀️</div>
+				<div class="label">Switch to Female Body</div>
+			</div>
+			<div class="switch-card" onclick="location.href='kid.html'">
+				<div class="icon">🧒</div>
+				<div class="label">Switch to Kid's Body</div>
+			</div>
+		</div>
+		
 		<div id="container"></div>
 
 		<div id="controls">
 			<button class="btn" onclick="displaySize('T-Shirt or Shirt', 'M')">T-Shirts or Shirts</button>
 			<button class="btn" onclick="displaySize('Pants or Trousers', 'L')">Pants or Trousers</button>
 			<button class="btn" onclick="displaySize('Jackets or Coats', 'XL')">Jackets or Coats</button>
-			<button class="btn" onclick="displaySize('Suits', 'M')">Suits</button>
 			<div id="sizeDisplay">Select an item</div>
+		</div>
+
+		<div id="back-button" onclick="window.location.href='/'">
+  			← Back to Home
 		</div>
 		
 		<script src="js/three.js"></script>
@@ -149,34 +161,80 @@
 				bustGirth = 86 + mesh.morphTargetInfluences[6] * BUSTGIRTHDIFF;
 				shoulders = 13 + mesh.morphTargetInfluences[4] * SHOULDERSDIFF;
 				waist = 77 + mesh.morphTargetInfluences[8] * WAISTDIFF;
+				hipGirth = 112 + mesh.morphTargetInfluences[12] * HIPHEIGHTDIFF;
+				thighGirth = 42 + mesh.morphTargetInfluences[14] * THIGHGIRTHDIFF;
+				armLength = 26 + mesh.morphTargetInfluences[9] * ARMLENGTHDIFF;
+				shoulderSlope = 1 + mesh.morphTargetInfluences[5] * SHOULDERSLOPEDIFF;
+
+				
 
 				console.log(chest);
+				console.log(shoulders);
 
 				if (chest === undefined || bustGirth === undefined || shoulders === undefined || waist === undefined) {
 					console.error("One or more morph target values are undefined.");
 					return;
 				}
 
-				var measurement = (0.6 * chest) + (0.2 * shoulders) + (0.2 * waist);
+				var iize = ``;
+				var measurement = 0;
 
+				if(type === 'T-Shirt or Shirt'){
+					measurement = chest;
+					if (Math.floor(measurement) <= 89) {
+        				iize = `XS 44`;
+    				} else if (Math.floor(measurement) >= 90 && Math.floor(measurement) <= 94) {
+        				iize = `S 46`;
+    				} else if (Math.floor(measurement) >= 95 && Math.floor(measurement) <= 99) {
+        				iize = `M 48`;
+    				} else if (Math.floor(measurement) >= 100 && Math.floor(measurement) <= 104) {
+        				iize = `L 50`;
+    				} else if (Math.floor(measurement) >= 105 && Math.floor(measurement) <= 109) {
+        				iize = `XL 52`;
+    				} else if (Math.floor(measurement) >= 110 && Math.floor(measurement) <= 114) {
+        				iize = `XXL 54`;
+    				} else if (Math.floor(measurement) >= 115) {
+        				iize = `XXXL 56`;
+    				}
+				}
+				else if (type === 'Pants or Trousers') {
+    				measurement = waist;
+					if (Math.floor(measurement) <= 75) {
+        				iize = `XS 44`;
+    				} else if (Math.floor(measurement) >= 76 && Math.floor(measurement) <= 79) {
+        				iize = `S 46`;
+    				} else if (Math.floor(measurement) >= 80 && Math.floor(measurement) <= 83) {
+        				iize = `M 48`;
+    				} else if (Math.floor(measurement) >= 84 && Math.floor(measurement) <= 87) {
+        				iize = `L 50`;
+    				} else if (Math.floor(measurement) >= 88 && Math.floor(measurement) <= 91) {
+        				iize = `XL 52`;
+    				} else if (Math.floor(measurement) >= 92 && Math.floor(measurement) <= 95) {
+        				iize = `XXL 54`;
+    				} else if (Math.floor(measurement) >= 96) {
+        				iize = `XXXL 56`;
+    				}
+				} else if (type === 'Jackets or Coats') {
+    				measurement = chest;
+					if (Math.floor(measurement) <= 89) {
+        				iize = `XS 44`;
+    				} else if (Math.floor(measurement) >= 90 && Math.floor(measurement) <= 94) {
+        				iize = `S 46`;
+    				} else if (Math.floor(measurement) >= 95 && Math.floor(measurement) <= 99) {
+        				iize = `M 48`;
+    				} else if (Math.floor(measurement) >= 100 && Math.floor(measurement) <= 104) {
+        				iize = `L 50`;
+    				} else if (Math.floor(measurement) >= 105 && Math.floor(measurement) <= 109) {
+        				iize = `XL 52`;
+    				} else if (Math.floor(measurement) >= 110 && Math.floor(measurement) <= 114) {
+        				iize = `XXL 54`;
+    				} else if (Math.floor(measurement) >= 115 && Math.floor(height) > 186) {
+        				iize = `XXXL 56`;
+    				}
+				}  else {
+    				console.log('ERROR: Invalid clothing type');
+				}
 
-				let iize;
-
-    			if (measurement >= 24 && measurement <= 46) {
-        			iize = "XS";
-    			} else if (measurement >= 47 && measurement <= 65) {
-        			iize = "S";
-    			} else if (measurement >= 66 && measurement <= 84) {
-        			iize = "M";
-    			} else if (measurement >= 85 && measurement <= 98) {
-        			iize = "L";
-    			} else if (measurement >= 99 && measurement <= 122) {
-        			iize = "XL";
-    			} else if (measurement >= 123 && measurement <= 130) {
-        			iize = "XXL";
-    			} else {
-        			iize = "Unknown";
-    			}
 
             	document.getElementById('sizeDisplay').innerText = `${type} - Size: ${iize}`;
         	}

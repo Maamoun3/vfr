@@ -4,25 +4,35 @@
 	<head>
 		<title>BodyVisualiser</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
 	<body>
-		
 		<div id="info">BodyVisualiser for VFR Project</div>
-		<div id="info"><a href="index.html">Switch to male body.</a></div>
-        <div id="info"><a href="female.html">Switch to female body.</a></div>
+		<div id="switch-container">
+			<div class="switch-card" onclick="location.href='kid.html'">
+				<div class="icon">🧒</div>
+				<div class="label">Switch to Kid's Body</div>
+			</div>
+			<div class="switch-card" onclick="location.href='index.html'">
+				<div class="icon">♂️</div>
+				<div class="label">Switch to Male Body</div>
+			</div>
+		</div>
 		<div id="container"></div>
 
 		<div id="controls">
 			<button class="btn" onclick="displaySize('T-Shirt or Shirt', 'M')">T-Shirts or Shirts</button>
 			<button class="btn" onclick="displaySize('Pants or Trousers', 'L')">Pants or Trousers</button>
 			<button class="btn" onclick="displaySize('Jackets or Coats', 'XL')">Jackets or Coats</button>
-			<button class="btn" onclick="displaySize('Suits', 'M')">Suits</button>
 			<div id="sizeDisplay">Select an item</div>
 		</div>
+
+		<div id="back-button" onclick="window.location.href='/'">
+  			← Back to Home
+		</div>
 		
+
 		<script src="js/three.js"></script>
 		
 		<script src="js/UCSCharacter.js"></script>
@@ -55,23 +65,23 @@
 			
 			var gui, skinConfig, morphConfig;
 
-			var height = 160;             const HEIGHTDIFF = 80;
-			var chest = 97;               const CHESTDIFF = 31;
-			var neck = 37;                const NECKDIFF = 10;
-			var neckHeight = 12;          const NECKHEIGHTDIFF = 6;
+			var height = 160;             const HEIGHTDIFF = 100;
+			var chest = 97;               const CHESTDIFF = 30;
+			var neck = 37;                const NECKDIFF = 8;
+			var neckHeight = 12;          const NECKHEIGHTDIFF = 4;
 			var shoulders = 13;           const SHOULDERSDIFF = 4;
 			var shoulderSlope = 1;        const SHOULDERSLOPEDIFF = 2;
-			var bustGirth = 86;           const BUSTGIRTHDIFF = 17;
+			var bustGirth = 86;           const BUSTGIRTHDIFF = 20;
 			var stomachForm = 1;          const STOMACHFORMDIFF = 2;
 			var waist = 77;               const WAISTDIFF = 20;
-			var armLength = 26;           const ARMLENGTHDIFF = 10;
+			var armLength = 26;           const ARMLENGTHDIFF = 11;
 			var upperArmGirth = 15;       const UPPERARMGIRTHDIFF = 10;
-			var wrist = 16;               const WRISTDIFF = 8;
+			var wrist = 16;               const WRISTDIFF = 9;
 			var hipGirth = 112;           const HIPGIRTHDIFF = 28;
-			var hipHeight = 36;           const HIPHEIGHTDIFF = 19;
-			var thighGirth = 42;          const THIGHGIRTHDIFF = 10;
+			var hipHeight = 36;           const HIPHEIGHTDIFF = 20;
+			var thighGirth = 42;          const THIGHGIRTHDIFF = 17;
 			var lowerLegLength = 38;      const LOWERLEGLENGTHDIFF = 14;
-			var calf = 55;                const CALFDIFF = 16;
+			var calf = 55;                const CALFDIFF = 18;
 				
 			
          
@@ -117,7 +127,7 @@
 				}
 				
 				var loader = new THREE.XHRLoader();
-				loader.load("models/skinned/childconfig.json", function ( text ) {
+				loader.load("models/skinned/femaleconfig.json", function ( text ) {
 
 					var config = JSON.parse( text );
 					character.loadParts( config );
@@ -132,92 +142,74 @@
 				controls.addEventListener( 'change', render );
 
 			}
-			
+
 			function displaySize(type, size) {
 
-				if (!character.root || !character.root.children[0] || !character.root.children[0].morphTargetInfluences) {
-					console.error("Mesh or morph targets not loaded yet.");
-					return;
-				}
+			if (!character.root || !character.root.children[0] || !character.root.children[0].morphTargetInfluences) {
+				console.error("Mesh or morph targets not loaded yet.");
+				return;
+			}
 
-				var mesh = character.root.children[0];
+			var mesh = character.root.children[0];
 
-				console.log("Morph Target Influences:", mesh.morphTargetInfluences);
-
-				if(type==="T-Shirt or Shirt"){
-					chest = 70 + mesh.morphTargetInfluences[5] * CHESTDIFF;
-					bustGirth = 60 + mesh.morphTargetInfluences[6] * BUSTGIRTHDIFF;
-					shoulders = 10 + mesh.morphTargetInfluences[3] * SHOULDERSDIFF;
-					waist = 59 + mesh.morphTargetInfluences[10] * WAISTDIFF;
-
-					console.log(chest);
-
-					if (chest === undefined || bustGirth === undefined || shoulders === undefined || waist === undefined) {
-						console.error("One or more morph target values are undefined.");
-						return;
-					}
-
-					var measurement = (0.5 * chest) + (0.2 * shoulders) + (0.1 * waist) + (0.2 * bustGirth);
+			console.log("Morph Target Influences:", mesh.morphTargetInfluences);
 
 
-					let iize;
-
-					if (measurement >= 24 && measurement <= 46) {
-						iize = "XS";
-					} else if (measurement >= 47 && measurement <= 65) {
-						iize = "S";
-					} else if (measurement >= 66 && measurement <= 84) {
-						iize = "M";
-					} else if (measurement >= 85 && measurement <= 98) {
-						iize = "L";
-					} else if (measurement >= 99 && measurement <= 122) {
-						iize = "XL";
-					} else if (measurement >= 123 && measurement <= 130) {
-						iize = "XXL";
-					} else {
-						iize = "Unknown";
-					}
-
-					document.getElementById('sizeDisplay').innerText = `${type} - Size: ${iize}`;
-					}
-
-					else if(type==="Pants or Trousers"){
-					waist = 77 + mesh.morphTargetInfluences[8] * CHESTDIFF;
-					hipGirth = 112 + mesh.morphTargetInfluences[12] * BUSTGIRTHDIFF;
-					thighGirth = 42 + mesh.morphTargetInfluences[14] * SHOULDERSDIFF;
-					lowerLegLength = 38 + mesh.morphTargetInfluences[15] * WAISTDIFF;
-
-					console.log(chest);
-
-					if (chest === undefined || bustGirth === undefined || shoulders === undefined || waist === undefined) {
-						console.error("One or more morph target values are undefined.");
-						return;
-					}
-
-					var measurement = (0.5 * waist) + (0.3 * hipGirth) + (0.1 * thighGirth) + (0.1 * lowerLegLength);
+			chest = 85 + mesh.morphTargetInfluences[5] * CHESTDIFF;
+			bustGirth = 86 + mesh.morphTargetInfluences[6] * BUSTGIRTHDIFF;
+			shoulders = 13 + mesh.morphTargetInfluences[4] * SHOULDERSDIFF;
+			waist = 75 + mesh.morphTargetInfluences[11] * WAISTDIFF;
+			hipGirth = 112 + mesh.morphTargetInfluences[12] * HIPHEIGHTDIFF;
+			thighGirth = 42 + mesh.morphTargetInfluences[14] * THIGHGIRTHDIFF;
+			armLength = 26 + mesh.morphTargetInfluences[9] * ARMLENGTHDIFF;
+			shoulderSlope = 1 + mesh.morphTargetInfluences[5] * SHOULDERSLOPEDIFF;
 
 
-					let iize;
 
-					if (measurement >= 24 && measurement <= 36) {
-						iize = "XS";
-					} else if (measurement >= 37 && measurement <= 48) {
-						iize = "S";
-					} else if (measurement >= 49 && measurement <= 62) {
-						iize = "M";
-					} else if (measurement >= 63 && measurement <= 75) {
-						iize = "L";
-					} else if (measurement >= 76 && measurement <= 89) {
-						iize = "XL";
-					} else if (measurement >= 90 && measurement <= 110) {
-						iize = "XXL";
-					} else {
-						iize = "To be continued";
-					}
+			console.log(chest);
+			console.log(shoulders);
 
-					document.getElementById('sizeDisplay').innerText = `${type} - Size: ${iize}`;
-					}
-				}
+			if (chest === undefined || bustGirth === undefined || shoulders === undefined || waist === undefined) {
+				console.error("One or more morph target values are undefined.");
+				return;
+			}
+
+			var measurement = 0;
+			var iize = ``;
+
+			if(type === 'T-Shirt or Shirt'){
+				measurement = Math.floor(chest);
+        		if (measurement <= 84) iize = `XS 34`;
+        		else if (measurement <= 89) iize = `S 36`;
+        		else if (measurement <= 94) iize = `M 38`;
+        		else if (measurement <= 99) iize = `L 40`;
+        		else if (measurement <= 104) iize = `XL 42`;
+        		else iize = `XXL 44`;
+			}
+			else if (type === 'Pants or Trousers') {
+				measurement = Math.floor(waist);
+        		if (measurement <= 70) iize = `XS 34`;
+        		else if (measurement <= 75) iize = `S 36`;
+        		else if (measurement <= 80) iize = `M 38`;
+        		else if (measurement <= 85) iize = `L 40`;
+        		else if (measurement <= 90) iize = `XL 42`;
+        		else iize = `XXL 44`;
+			} else if (type === 'Jackets or Coats') {
+				measurement = Math.floor(chest);
+        		if (measurement <= 84) iize = `XS 34`;
+        		else if (measurement <= 89) iize = `S 36`;
+        		else if (measurement <= 94) iize = `M 38`;
+        		else if (measurement <= 99) iize = `L 40`;
+        		else if (measurement <= 104) iize = `XL 42`;
+        		else iize = `XXL 44`;
+			} else {
+				console.log('ERROR: Invalid clothing type');
+			}
+
+
+			document.getElementById('sizeDisplay').innerText = `${type} - Size: ${iize}`;
+			}
+			
 		
 			
 			function setupMorphsGUI() {
